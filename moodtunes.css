@@ -710,6 +710,13 @@ select:focus-visible {
     .dropdown-menu ul li:hover {
         background: rgba(100, 255, 218, 0.1);
     }
+
+        .dropdown-menu ul li#logoutBtn {
+        text-align: center;
+        justify-content: center;
+        padding: 1rem;
+        width: 100%; /* Ensure full width */
+    }
 }
 
 /* Media Queries for Music Card */
