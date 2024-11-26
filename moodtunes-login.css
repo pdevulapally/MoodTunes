@@ -172,5 +172,6 @@ header .logo h1 {
     #googleLoginBtn {
     font-size: 0.9rem;
     padding: 0.6rem;  
-        
+    position: relative;
+    left: 80px;    
 }
