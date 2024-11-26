@@ -1,0 +1,128 @@
+/* Variables */
+:root {
+    --primary-color: #0A192F;
+    --secondary-color: #112240;
+    --accent-color: #64FFDA;
+    --text-primary: #CCD6F6;
+    --text-secondary: #8892B0;
+    --danger-color: #e63946;
+    --border-radius: 10px;
+    --shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    --font-family: 'Poppins', 'Roboto', sans-serif;
+}
+
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-family);
+}
+
+body {
+    background-color: var(--primary-color);
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+header {
+    background-color: var(--secondary-color);
+    padding: 1rem 3%;
+    box-shadow: var(--shadow);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo h1 {
+    color: var(--accent-color);
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+header .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 1.5rem;
+}
+
+header .nav-links li {
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+header .nav-links li:hover {
+    color: var(--accent-color);
+}
+
+header .nav-links li i {
+    margin-right: 0.5rem;
+}
+
+/* Profile Section */
+.profile-section {
+    max-width: 800px;
+    margin: 4rem auto;
+    padding: 2rem;
+    background-color: var(--secondary-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    text-align: center;
+}
+
+.profile-section h2 {
+    color: var(--accent-color);
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.profile-info img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 4px solid var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.profile-info h3 {
+    font-size: 1.8rem;
+    margin: 0.5rem 0;
+    color: var(--text-primary);
+}
+
+.profile-info p {
+    color: var(--text-secondary);
+}
+
+.profile-actions button {
+    background-color: var(--danger-color);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.profile-actions button:hover {
+    background-color: #b71c1c;
+}
+
+/* Footer */
+footer {
+    background-color: var(--secondary-color);
+    color: var(--text-secondary);
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+}

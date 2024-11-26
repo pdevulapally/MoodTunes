@@ -1,0 +1,171 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--primary-color, #0A192F); /* Same as MoodTunes background */
+    color: var(--text-primary, #CCD6F6); /* Same text color as MoodTunes */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Header Styles */
+header {
+    width: 100%;
+    background-color: var(--secondary-color, #112240);
+    padding: 1rem;
+    box-shadow: var(--shadow-elevated, 0 4px 10px rgba(0, 0, 0, 0.1));
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    z-index: 1000;
+}
+
+header .logo h1 {
+    color: var(--accent-color, #64FFDA);
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+/* Login Section */
+#login-section {
+    background: var(--secondary-color, #112240);
+    padding: 2rem;
+    border-radius: var(--border-radius, 10px);
+    box-shadow: var(--shadow-elevated, 0 8px 30px rgba(0, 0, 0, 0.2));
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    margin-top: 100px;
+    z-index: 1;
+}
+
+#login-section h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary, #CCD6F6);
+}
+
+#login-section h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: var(--text-secondary, #8892B0);
+}
+
+#loginForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#loginForm input {
+    padding: 0.75rem;
+    font-size: 1rem;
+    border-radius: var(--border-radius, 5px);
+    border: 1px solid #ccc;
+    outline: none;
+    transition: border 0.3s ease, background-color 0.3s ease;
+    background: var(--primary-color, #0A192F);
+    color: var(--text-primary, #CCD6F6);
+}
+
+#loginForm input:focus {
+    border: 1px solid var(--accent-color, #64FFDA);
+    background-color: var(--secondary-color, #112240);
+}
+
+#loginForm button {
+    padding: 0.75rem;
+    font-size: 1rem;
+    border-radius: var(--border-radius, 5px);
+    border: none;
+    background-color: var(--accent-color, #64FFDA);
+    color: var(--primary-color, #0A192F);
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#loginForm button:hover {
+    background-color: #52e0c7;
+    transform: translateY(-3px);
+}
+
+#googleLoginBtn {
+    background-color: #fff; /* White background */
+    color: #555; /* Darker text for better readability */
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.75rem 1.5rem; /* More padding for a comfortable button size */
+    border-radius: 30px; /* Rounded edges */
+    border: 1px solid #ddd; /* Subtle border */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; /* Space between logo and text */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    position: relative;
+    left: 57px;
+}
+
+#googleLoginBtn:hover {
+    background-color: #f7f7f7; /* Slightly darker background on hover */
+    transform: translateY(-2px); /* Lift effect */
+}
+
+#googleLoginBtn:active {
+    background-color: #eee; /* Even darker background when clicked */
+    transform: translateY(0); /* Reset lift */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* Slightly stronger shadow */
+}
+
+#googleLoginBtn img {
+    width: 20px; /* Google logo size */
+    height: 20px;
+}
+
+#signUpLink {
+    color: var(--accent-color, #64FFDA);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#signUpLink:hover {
+    text-decoration: underline;
+}
+
+/* Message Area */
+#messageArea {
+    color: #e76f51;
+    margin-top: 1rem;
+    font-size: 1rem;
+    display: none;
+}
+
+#messageArea.visible {
+    display: block;
+}
+
+/* Responsive Design */
+@media (max-width: 576px) {
+    #login-section {
+        padding: 1.5rem;
+    }
+
+    #loginForm input,
+    #loginForm button,
+    #googleLoginBtn {
+        font-size: 0.9rem;
+        padding: 0.6rem;
+    }
+}
