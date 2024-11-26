@@ -163,9 +163,12 @@ header .logo h1 {
     }
 
     #loginForm input,
-    #loginForm button,
-    #googleLoginBtn {
+    #loginForm button {
         font-size: 0.9rem;
         padding: 0.6rem;
     }
+    #googleLoginBtn {
+    font-size: 0.9rem;
+    padding: 0.6rem;  
+        
 }
