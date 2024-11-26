@@ -7,8 +7,8 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f0f4f8;
-    color: #333;
+    background-color: #0A192F; /* Matches MoodTunes primary theme */
+    color: #CCD6F6; /* Soft Light Blue */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -19,7 +19,7 @@ body {
 /* Header Styles */
 header {
     width: 100%;
-    background-color: #2e3a59;
+    background-color: #112240;
     padding: 1rem;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     position: absolute;
@@ -31,17 +31,17 @@ header {
 }
 
 header .logo h1 {
-    color: #f4a261;
+    color: #64FFDA; /* Vibrant Teal */
     font-size: 2rem;
     font-weight: bold;
 }
 
-/* Signup Section */
+/* Sign-Up Section */
 #signup-section {
-    background: #ffffff;
+    background: #112240;
     padding: 2rem;
     border-radius: 10px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
     max-width: 400px;
     width: 100%;
     text-align: center;
@@ -52,7 +52,7 @@ header .logo h1 {
 #signup-section h2 {
     font-size: 2rem;
     margin-bottom: 1.5rem;
-    color: #2e3a59;
+    color: #64FFDA;
 }
 
 #signupForm {
@@ -65,13 +65,16 @@ header .logo h1 {
     padding: 0.75rem;
     font-size: 1rem;
     border-radius: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid #8892B0;
+    background-color: #0A192F;
+    color: #CCD6F6;
     outline: none;
-    transition: border 0.3s ease;
+    transition: border 0.3s ease, transform 0.3s ease;
 }
 
 #signupForm input:focus {
-    border: 1px solid #2e3a59;
+    border: 1px solid #64FFDA;
+    transform: scale(1.02);
 }
 
 #signupForm button {
@@ -79,25 +82,42 @@ header .logo h1 {
     font-size: 1rem;
     border-radius: 5px;
     border: none;
-    background-color: #2e3a59;
-    color: #edf2f4;
+    background-color: #64FFDA;
+    color: #0A192F;
     cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 #signupForm button:hover {
-    background-color: #1a1a2e;
+    background-color: #4DD9C4; /* Slightly lighter teal */
     transform: translateY(-3px);
 }
 
-#signupMessageArea {
-    color: #e76f51;
+#signupForm button:active {
+    transform: translateY(1px);
+}
+
+#loginLink {
+    color: #64FFDA;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#loginLink:hover {
+    text-decoration: underline;
+}
+
+/* Message Area */
+#messageArea {
+    color: #E76F51; /* Error Red */
     margin-top: 1rem;
     font-size: 1rem;
     display: none;
 }
 
-#signupMessageArea.visible {
+#messageArea.visible {
     display: block;
 }
 
