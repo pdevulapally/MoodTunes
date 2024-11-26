@@ -1,0 +1,111 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #0A192F;
+    color: #CCD6F6;
+    line-height: 1.8;
+    padding: 1rem;
+}
+
+header {
+    background-color: #112240;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+header .logo h1 {
+    color: #64FFDA;
+    font-size: 1.8rem;
+}
+
+header .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+}
+
+header .nav-links li a {
+    color: #CCD6F6;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+header .nav-links li a:hover {
+    color: #64FFDA;
+}
+
+/* Privacy Section */
+.privacy-section {
+    background: #112240;
+    padding: 3rem;
+    margin: 2rem auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    max-width: 800px;
+}
+
+.privacy-section h2 {
+    color: #64FFDA;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.privacy-section p,
+.privacy-section ul li {
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    color: #8892B0;
+}
+
+.privacy-section h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #CCD6F6;
+}
+
+.privacy-section ul {
+    margin-left: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.privacy-section ul li {
+    list-style-type: disc;
+    margin-bottom: 0.5rem;
+}
+
+.privacy-section a {
+    color: #64FFDA;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.privacy-section a:hover {
+    text-decoration: underline;
+}
+
+.privacy-section .last-updated {
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: #8892B0;
+    text-align: center;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 2rem;
+    background: #112240;
+    padding: 1rem;
+    color: #8892B0;
+}
