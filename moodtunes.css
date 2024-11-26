@@ -706,3 +706,66 @@ select:focus-visible {
         background: rgba(100, 255, 218, 0.1);
     }
 }
+
+/* Media Queries for Music Card */
+
+/* For tablets and smaller screens */
+@media (max-width: 768px) {
+    .music-card {
+        flex-direction: column;
+        padding: 0.8rem;
+    }
+
+    .music-card img {
+        max-height: 150px; /* Reduce max height for smaller screens */
+        margin-bottom: 0.8rem;
+    }
+
+    .music-card h3 {
+        font-size: 1rem; /* Adjust font size for smaller screens */
+    }
+
+    .music-card p {
+        font-size: 0.9rem;
+    }
+
+    .music-card .spotify-button {
+        font-size: 0.8rem; /* Smaller font for button */
+        padding: 0.4rem 0.8rem;
+    }
+
+    .music-card .spotify-button img {
+        width: 18px; /* Adjust Spotify logo size */
+        height: 18px;
+        margin-right: 0.4rem;
+    }
+}
+
+/* For mobile devices */
+@media (max-width: 480px) {
+    .music-card {
+        padding: 0.6rem;
+    }
+
+    .music-card img {
+        max-height: 317px; /* Further reduce max height */
+    }
+
+    .music-card h3 {
+        font-size: 0.9rem;
+    }
+
+    .music-card p {
+        font-size: 0.8rem;
+    }
+
+    .music-card .spotify-button {
+        font-size: 0.7rem; /* Even smaller font for button */
+        padding: 0.3rem 0.6rem;
+    }
+
+    .music-card .spotify-button img {
+        width: 16px; /* Adjust Spotify logo size further */
+        height: 16px;
+    }
+}
