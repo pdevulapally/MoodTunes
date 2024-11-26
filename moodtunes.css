@@ -173,6 +173,11 @@ header nav {
     padding: 2rem;
 }
 
+.footer-content a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
 .hero-button {
     display: inline-block;
     background: var(--gradient-accent);
