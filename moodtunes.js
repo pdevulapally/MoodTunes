@@ -144,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
     moodOptions.forEach((option) => {
         option.addEventListener("click", () => {
             if (!option.classList.contains("enabled")) {
-                alert("Please log in to use MoodTunes.");
+                showLoginModal();
                 return;
             }
             moodOptions.forEach((opt) => opt.classList.remove("selected"));
@@ -156,6 +156,27 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+// Display the Login Modal
+function showLoginModal() {
+    const modal = document.getElementById("loginModal");
+    const closeModal = document.getElementById("closeModal");
+
+    // Show the modal
+    modal.classList.remove("hidden");
+
+    // Close modal on clicking the close button
+    closeModal.addEventListener("click", () => {
+        modal.classList.add("hidden");
+    });
+
+    // Close modal on clicking outside the modal content
+    window.addEventListener("click", (event) => {
+        if (event.target === modal) {
+            modal.classList.add("hidden");
+        }
+    });
+}
 
 // Fetch Spotify Playlists
 async function fetchSpotifyPlaylists(mood, language) {
