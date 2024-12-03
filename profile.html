@@ -14,6 +14,11 @@
             <div class="logo">
                 <h1>MoodTunes</h1>
             </div>
+            <div class="burger-menu">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
             <ul class="nav-links">
                 <li><a href="moodtunes.html">Home</a></li>
                 <li><a href="settings.html">Settings</a></li>
@@ -27,24 +32,131 @@
             <h2>Your Profile</h2>
             <div class="profile-container">
                 <div class="profile-info">
-                    <img id="profileAvatar" src="https://via.placeholder.com/150" alt="Profile Picture">
-                    <h3 id="profileName">User Name</h3>
-                    <p id="profileEmail">user@example.com</p>
+                    <div class="avatar-container">
+                        <img id="profileAvatar" src="https://via.placeholder.com/150" alt="Profile Picture">
+                        <button class="change-avatar-btn" title="Change Profile Picture">
+                            <i class="fas fa-camera"></i>
+                        </button>
+                    </div>
+                    <div class="profile-details">
+                        <div class="detail-group">
+                            <label>Name</label>
+                            <h3 id="profileName">User Name</h3>
+                            <button class="edit-btn" data-field="name" title="Edit Name">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                        <div class="detail-group">
+                            <label>Email</label>
+                            <p id="profileEmail">user@example.com</p>
+                            <button class="edit-btn" data-field="email" title="Edit Email">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
+                
                 <div class="profile-actions">
+                    <button class="btn-primary" id="changePasswordBtn">
+                        <i class="fas fa-key"></i> Change Password
+                    </button>
                     <button id="deleteAccountBtn" class="btn-danger">
                         <i class="fas fa-trash"></i> Delete Account
                     </button>
                 </div>
             </div>
         </section>
+
+        <!-- Edit Profile Modal -->
+        <div class="modal" id="editModal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h3 id="modalTitle">Edit Profile</h3>
+                <form id="editProfileForm">
+                    <div class="form-group">
+                        <label for="editField" id="editFieldLabel">Field</label>
+                        <input type="text" id="editField" name="editField" required autocomplete="off">
+                    </div>
+                    <div class="modal-buttons">
+                        <button type="button" class="btn-secondary cancel-btn">Cancel</button>
+                        <button type="submit" class="btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Change Password Modal -->
+        <div class="modal" id="passwordModal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <h3>Change Password</h3>
+                <form id="changePasswordForm">
+                    <!-- Hidden username field for accessibility -->
+                    <input 
+                        type="text" 
+                        id="username" 
+                        name="username" 
+                        autocomplete="username" 
+                        style="display: none"
+                    >
+                    
+                    <div class="form-group">
+                        <label for="currentPassword">Current Password</label>
+                        <div class="password-input">
+                            <input 
+                                type="password" 
+                                id="currentPassword" 
+                                name="currentPassword"
+                                required 
+                                autocomplete="current-password"
+                                minlength="6">
+                            <i class="fas fa-eye toggle-password"></i>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword">New Password</label>
+                        <div class="password-input">
+                            <input 
+                                type="password" 
+                                id="newPassword" 
+                                name="newPassword"
+                                required 
+                                autocomplete="new-password"
+                                minlength="6">
+                            <i class="fas fa-eye toggle-password"></i>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm New Password</label>
+                        <div class="password-input">
+                            <input 
+                                type="password" 
+                                id="confirmPassword" 
+                                name="confirmPassword"
+                                required 
+                                autocomplete="new-password"
+                                minlength="6">
+                            <i class="fas fa-eye toggle-password"></i>
+                        </div>
+                    </div>
+                    <div class="modal-buttons">
+                        <button type="button" class="btn-secondary cancel-btn">Cancel</button>
+                        <button type="submit" class="btn-primary">Update Password</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </main>
 
     <footer>
         <p>&copy; 2024 MoodTunes. All rights reserved.</p>
     </footer>
 
-    <!-- JavaScript -->
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loader"></div>
+    </div>
+
     <script type="module" src="profile.js"></script>
 </body>
 </html>
