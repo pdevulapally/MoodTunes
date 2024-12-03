@@ -105,7 +105,7 @@ header .logo h1 {
     font-size: 1rem;
     font-weight: 500;
     padding: 0.75rem 1.5rem; /* More padding for a comfortable button size */
-    border-radius: 30px; /* Rounded edges */
+    border-radius: 8px; /* Rounded edges */
     border: 1px solid #ddd; /* Subtle border */
     display: flex;
     align-items: center;
