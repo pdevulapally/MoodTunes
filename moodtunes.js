@@ -32,7 +32,6 @@ const languageToMarketMap = {
     de: "DE",
     zh: "CN",
     ta: "IN",
-    ml: "IN",
     ko: "KR",
     ja: "JP",
     ru: "RU",
@@ -45,8 +44,7 @@ const languageToMarketMap = {
     th: "TH",
     pl: "PL",
     tr: "TR",
-    uk: "UA",
-    id: "ID",
+    nl: "NL",
 };
 
 // Fetch Spotify Access Token
@@ -63,9 +61,14 @@ async function fetchSpotifyAccessToken() {
             body: "grant_type=client_credentials",
         });
         const data = await response.json();
-        spotifyAccessToken = data.access_token;
+        if (response.ok) {
+            spotifyAccessToken = data.access_token;
+            console.log("Spotify Access Token fetched successfully.");
+        } else {
+            console.error("Error fetching Spotify access token:", data);
+        }
     } catch (error) {
-        console.error("Error fetching Spotify access token:", error);
+        console.error("Error fetching Spotify access token:", error.message);
     }
 }
 
@@ -91,18 +94,17 @@ document.addEventListener("DOMContentLoaded", () => {
     // Monitor Firebase Auth State
     onAuthStateChanged(auth, (user) => {
         if (user) {
-            authSection.classList.add("hidden");
-            profileDropdown.classList.remove("hidden");
+            authSection.style.display = "none";
+            profileDropdown.style.display = "block";
             userAvatar.src = user.photoURL || "https://via.placeholder.com/40";
             dropdownAvatar.src = user.photoURL || "https://via.placeholder.com/50";
             userName.textContent = user.displayName || "User";
             userEmail.textContent = user.email || "No Email";
             moodOptions.forEach((option) => option.classList.add("enabled"));
         } else {
-            authSection.classList.remove("hidden");
-            profileDropdown.classList.add("hidden");
+            authSection.style.display = "block";
+            profileDropdown.style.display = "none";
             moodOptions.forEach((option) => option.classList.remove("enabled"));
-            window.location.href = "login.html";
         }
     });
 
@@ -122,29 +124,20 @@ document.addEventListener("DOMContentLoaded", () => {
         profileMenu.classList.toggle("active");
     });
 
-    // Close Dropdown on Outside Click
-    document.addEventListener("click", (e) => {
-        if (!profileTrigger.contains(e.target) && !profileMenu.contains(e.target)) {
-            profileMenu.classList.remove("active");
-        }
-    });
-
     // Save Language Preference
     savePreferencesBtn.addEventListener("click", () => {
         const selectedLanguage = languageSelect.value;
         localStorage.setItem("preferredLanguage", selectedLanguage);
 
-        const successMessage = document.getElementById("preferencesSuccessMessage");
+        let successMessage = document.getElementById("preferencesSuccessMessage");
         if (!successMessage) {
-            const message = document.createElement("p");
-            message.id = "preferencesSuccessMessage";
-            message.textContent = "Preferences saved!";
-            message.style.color = "#4CAF50";
-            message.style.marginTop = "10px";
-            preferencesForm.appendChild(message);
-        } else {
-            successMessage.textContent = "Preferences saved!";
+            successMessage = document.createElement("p");
+            successMessage.id = "preferencesSuccessMessage";
+            successMessage.style.color = "#4CAF50";
+            successMessage.style.marginTop = "10px";
+            preferencesForm.appendChild(successMessage);
         }
+        successMessage.textContent = "Preferences saved successfully!";
     });
 
     // Handle Mood Selection
@@ -154,7 +147,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 alert("Please log in to use MoodTunes.");
                 return;
             }
-
             moodOptions.forEach((opt) => opt.classList.remove("selected"));
             option.classList.add("selected");
 
@@ -163,90 +155,100 @@ document.addEventListener("DOMContentLoaded", () => {
             fetchSpotifyPlaylists(mood, language);
         });
     });
-
-    // Fetch Spotify Playlists
-    async function fetchSpotifyPlaylists(mood, language) {
-        const market = languageToMarketMap[language] || "US";
-        const query = `${getLanguageKeyword(language)} ${mood}`;
-        const url = `https://api.spotify.com/v1/search?q=${encodeURIComponent(
-            query
-        )}&type=playlist&market=${market}&limit=10`;
-
-        try {
-            const response = await fetch(url, {
-                headers: {
-                    Authorization: `Bearer ${spotifyAccessToken}`,
-                },
-            });
-            const data = await response.json();
-
-            if (data.playlists && data.playlists.items.length > 0) {
-                displayPlaylists(data.playlists.items);
-            } else {
-                displayErrorMessage(`No playlists found for mood: ${mood} in ${language}`);
-            }
-        } catch (error) {
-            console.error("Error fetching playlists:", error);
-            displayErrorMessage("Failed to fetch playlists. Please try again.");
-        }
-    }
-
-    // Display Playlists
-    function displayPlaylists(playlists) {
-        const musicGrid = document.querySelector(".music-grid");
-        musicGrid.innerHTML = "";
-
-        playlists.forEach((playlist) => {
-            const musicCard = document.createElement("div");
-            musicCard.className = "music-card";
-
-            musicCard.innerHTML = `
-                <img src="${playlist.images[0]?.url || 'https://via.placeholder.com/300'}" alt="${playlist.name}">
-                <h3>${playlist.name}</h3>
-                <p>By ${playlist.owner.display_name}</p>
-                <a href="${playlist.external_urls.spotify}" target="_blank" class="spotify-button">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Spotify_icon.svg" alt="Spotify Logo" style="width:20px; height:20px; margin-right:5px;">
-                    Listen on Spotify
-                </a>
-            `;
-            musicGrid.appendChild(musicCard);
-        });
-    }
-
-    // Display Error Message
-    function displayErrorMessage(message) {
-        const musicGrid = document.querySelector(".music-grid");
-        musicGrid.innerHTML = `<p style="color: red;">${message}</p>`;
-    }
-
-    // Helper Function: Get Language Keyword
-    function getLanguageKeyword(language) {
-        const languageKeywords = {
-            en: "english",
-            te: "telugu",
-            hi: "hindi",
-            es: "spanish",
-            fr: "french",
-            de: "german",
-            zh: "chinese",
-            ta: "tamil",
-            ml: "malayalam",
-            ko: "korean",
-            ja: "japanese",
-            ru: "russian",
-            it: "italian",
-            pt: "portuguese",
-            ar: "arabic",
-            bn: "bengali",
-            ur: "urdu",
-            vi: "vietnamese",
-            th: "thai",
-            pl: "polish",
-            tr: "turkish",
-            uk: "ukrainian",
-            id: "indonesian",
-        };
-
-        return languageKeywords[language] || "english";
-    }
 });
+
+// Fetch Spotify Playlists
+async function fetchSpotifyPlaylists(mood, language) {
+    const market = languageToMarketMap[language] || "US";
+    const query = `${getLanguageKeyword(language)} ${mood}`;
+    const url = `https://api.spotify.com/v1/search?q=${encodeURIComponent(
+        query
+    )}&type=playlist&market=${market}&limit=10`;
+
+    try {
+        const response = await fetch(url, {
+            headers: {
+                Authorization: `Bearer ${spotifyAccessToken}`,
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error(`Spotify API error: ${response.status} - ${response.statusText}`);
+        }
+
+        const data = await response.json();
+
+        if (data.playlists && data.playlists.items.length > 0) {
+            displayPlaylists(data.playlists.items);
+        } else {
+            displayErrorMessage(`No playlists found for mood: ${mood} in ${language}`);
+        }
+    } catch (error) {
+        console.error("Error fetching playlists:", error.message);
+        displayErrorMessage("Failed to fetch playlists. Please try again later.");
+    }
+}
+
+// Display Playlists
+function displayPlaylists(playlists) {
+    const musicGrid = document.querySelector(".music-grid");
+    musicGrid.innerHTML = "";
+
+    playlists.forEach((playlist) => {
+        if (!playlist || !playlist.images || playlist.images.length === 0 || !playlist.name) {
+            console.warn("Skipping invalid playlist:", playlist);
+            return;
+        }
+
+        const musicCard = document.createElement("div");
+        musicCard.className = "music-card";
+
+        const imageUrl = playlist.images[0].url;
+
+        musicCard.innerHTML = `
+            <img src="${imageUrl}" alt="${playlist.name}">
+            <h3>${playlist.name}</h3>
+            <p>By ${playlist.owner.display_name || "Unknown"}</p>
+            <a href="${playlist.external_urls.spotify}" target="_blank" class="spotify-button">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Spotify_icon.svg" alt="Spotify Logo" style="width:20px; height:20px; margin-right:5px;">
+                Listen on Spotify
+            </a>
+        `;
+        musicGrid.appendChild(musicCard);
+    });
+}
+
+// Display Error Message
+function displayErrorMessage(message) {
+    const musicGrid = document.querySelector(".music-grid");
+    musicGrid.innerHTML = `<p style="color: red;">${message}</p>`;
+}
+
+// Helper Function: Get Language Keyword
+function getLanguageKeyword(language) {
+    const languageKeywords = {
+        en: "english",
+        te: "telugu",
+        hi: "hindi",
+        es: "spanish",
+        fr: "french",
+        de: "german",
+        zh: "chinese",
+        ta: "tamil",
+        ko: "korean",
+        ja: "japanese",
+        ru: "russian",
+        it: "italian",
+        pt: "portuguese",
+        ar: "arabic",
+        bn: "bengali",
+        ur: "urdu",
+        vi: "vietnamese",
+        th: "thai",
+        pl: "polish",
+        tr: "turkish",
+        nl: "dutch",
+    };
+
+    return languageKeywords[language] || "english";
+}
