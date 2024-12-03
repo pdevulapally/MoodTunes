@@ -136,7 +136,6 @@ header .logo h1 {
 
 #signUpLink {
     color: var(--accent-color, #64FFDA);
-    text-decoration: none;
     font-weight: bold;
 }
 
